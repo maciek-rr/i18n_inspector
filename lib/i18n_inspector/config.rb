@@ -1,6 +1,6 @@
 class I18nInspector::Config
   attr_writer :dict_hash_traverser, :scope_generator, :extractor_backend,
-    :file_finder
+    :file_finder, :yml_parser
   
   def dict_hash_traverser
     @dict_hash_traverser ||= I18nInspector::DictHashTraverser::Recursive
@@ -16,6 +16,10 @@ class I18nInspector::Config
   
   def file_finder
     @file_finder ||= I18nInspector::FileFinder
+  end
+  
+  def yml_parser
+    @yml_parser ||= Syck
   end
   
 end

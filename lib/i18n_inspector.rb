@@ -1,4 +1,5 @@
 require "i18n_inspector/version"
+require "syck"
 
 class I18nInspector
   autoload :DictParser, 'i18n_inspector/dict_parser'
@@ -55,7 +56,7 @@ class I18nInspector
   end
   
   def dictionary_keys_from_file
-    dp = DictParser.new(@dict_file, config.dict_hash_traverser)
+    dp = DictParser.new(@dict_file, config.dict_hash_traverser, config.yml_parser)
     dp.full_keys
   end
   

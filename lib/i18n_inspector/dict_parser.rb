@@ -1,10 +1,9 @@
-require "syck"
-
 class I18nInspector::DictParser
 
-  def initialize(dict_file, traverser_class)
-    @dict_file = dict_file
-    @traverse_class = traverser_class
+  def initialize(dict_file_name, traverser_class, yml_parser_class)
+    @dict_file_name = dict_file_name
+    @traverser_class = traverser_class
+    @yml_parser_class = yml_parser_class
   end
   
   def full_keys
@@ -14,11 +13,11 @@ class I18nInspector::DictParser
   protected
   
   def dictionary_hash
-    @dictionary_hash ||= dictionary_hash_from_file
+    dictionary_hash_without_language_scope(raw_dictionary_hash)
   end
   
-  def dictionary_hash_from_file
-    dictionary_hash_without_language_scope(Syck.load_file(@dict_file))
+  def raw_dictionary_hash
+    @yml_parser_class.load_file(@dict_file_name)
   end
   
   def dictionary_hash_without_language_scope(dh)
@@ -30,7 +29,7 @@ class I18nInspector::DictParser
   end
   
   def traverser
-    @travreser_class.new(dictionary_hash)
+    @traverser_class.new(dictionary_hash)
   end
   
 end

@@ -1,5 +1,5 @@
 class I18nInspector::KeyExtractor
-  
+ 
   def initialize(extractor_backend_class, scope_generator_class)
     @extractor_backend_class = extractor_backend_class
     @scope_generator_class = scope_generator_class
@@ -13,7 +13,7 @@ class I18nInspector::KeyExtractor
   end
   
   def from_files(files)
-    files.map { |f| from_string(File.read(f), scope_for_file(f)) }.flatten.uniq
+    files.map { |f| from_string(File.read(f), f) }.flatten.uniq
   end
   
   protected
