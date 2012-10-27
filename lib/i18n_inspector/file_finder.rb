@@ -5,6 +5,7 @@ class I18nInspector::FileFinder
   end
 
   def files
-    Dir[File.join(@search_dir, '**/*.rb')] + Dir[File.join(@search_dir, '**/*.erb')]
+    Dir[File.join(@search_dir, '**/*.rb')] + 
+      Dir[File.join(@search_dir, '**/*.erb')]
   end
 end
