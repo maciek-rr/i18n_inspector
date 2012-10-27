@@ -15,7 +15,8 @@ class I18nInspector::ScopeGenerator::Rails
   protected
   
   def unfold_key(key, scope)
-    (scope + [key.sub(FOLDED_KEY_START, '')]).compact.join(KEY_SCOPE_DELIMITER)
+    (scope + [key.sub(FOLDED_KEY_START, '')]).compact.
+      join(KEY_SCOPE_DELIMITER)
   end
   
   def key_folded?(key)
@@ -24,11 +25,11 @@ class I18nInspector::ScopeGenerator::Rails
   
   def scope_for_file(fullname)
     dir = File.dirname(fullname)
-    key = filename_to_key(fullname)
     if view_dir?(dir)
+      key = filename_to_key(fullname)
       view_dir_to_scope(dir) + [key]
     else
-      [key]
+      []
     end
   end
 
@@ -39,11 +40,11 @@ class I18nInspector::ScopeGenerator::Rails
   end
   
   def view_dir_to_scope(dir)
-    dir.split(views_dir_name).last.sub(/\A\//, '').split('/')    
+    dir.split(VIEWS_DIR_NAME).last.sub(/\A\//, '').split('/')    
   end
   
   def view_dir?(dir)
-    dir.include?("/#{VIEWS_DIR_NAME}/")
+    dir.include?("/#{VIEWS_DIR_NAME}")
   end
   
 end
